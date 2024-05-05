@@ -1,1 +1,3 @@
-const reverseWords = (str) => str.split(" ").reverse().join(" ");
+const lcm = (a, b) => {
+  return (a * b) / gcd(a, b);
+};
