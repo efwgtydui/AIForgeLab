@@ -1,3 +1,1 @@
-function removeDuplicates(arr) {
-  return [...new Set(arr)];
-}
+const head = (arr) => arr[0];
