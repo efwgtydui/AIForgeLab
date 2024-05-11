@@ -1,10 +1,24 @@
-function generateParenthesis(n) {
-  const result = [];
-  backtrack("", 0, 0);
-  return result;
-  function backtrack(current, open, close) {
-    if (current.length === 2 * n) result.push(current);
-    if (open < n) backtrack(current + "(", open + 1, close);
-    if (close < open) backtrack(current + ")", open, close + 1);
+function canFinish(numCourses, prerequisites) {
+  const graph = new Map();
+  const visited = new Array(numCourses).fill(0);
+  for (const [course, prerequisite] of prerequisites) {
+    if (!graph.has(course)) graph.set(course, []);
+    graph.get(course).push(prerequisite);
+  }
+  for (let i = 0; i < numCourses; i++) {
+    if (!dfs(i)) return false;
+  }
+  return true;
+  function dfs(course) {
+    if (visited[course] === 1) return false;
+    if (visited[course] === -1) return true;
+    visited[course] = 1;
+    if (graph.has(course)) {
+      for (const prerequisite of graph.get(course)) {
+        if (!dfs(prerequisite)) return false;
+      }
+    }
+    visited[course] = -1;
+    return true;
   }
 }
